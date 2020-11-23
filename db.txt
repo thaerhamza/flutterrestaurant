@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS  `users` (
+  `use_id` int(11)  NOT NULL AUTO_INCREMENT,
+  `use_name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `use_mobile` int(11) NOT NULL,
+  `use_pwd` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `use_datetime` datetime NOT NULL,
+  `use_active` tinyint(1) NOT NULL DEFAULT 1,
+  `use_token` varchar(500) COLLATE utf8mb4_bin NOT NULL,
+  `use_lastdate` datetime NOT NULL,
+  `use_note` varchar(500) COLLATE utf8mb4_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin  AUTO_INCREMENT=1;
+
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
