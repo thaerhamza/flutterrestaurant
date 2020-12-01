@@ -7,6 +7,7 @@ if (
     isset($_POST["use_name"])
     && isset($_POST["use_pwd"])
     && isset($_POST["use_mobile"])
+    && is_auth()
 ) {
     $use_name = $_POST["use_name"];
     $use_pwd = $_POST["use_pwd"];

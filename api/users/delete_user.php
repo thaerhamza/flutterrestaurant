@@ -6,6 +6,7 @@ include_once "../../library/function.php";
 if (
     isset($_GET["use_id"])
     && is_numeric($_GET["use_id"])
+    && is_auth()
 ) {
     $use_id = htmlspecialchars(strip_tags($_GET["use_id"]));
 
