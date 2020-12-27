@@ -19,9 +19,13 @@ if (
     $arrJson = array();
     if ($result->rowCount() > 0) {
         $arrJson  = $result->fetch();
+        $resJson = array("result" => "success", "code" => "200", "message" => $arrJson);
+        echo json_encode($resJson, JSON_UNESCAPED_UNICODE);
+    } else {
+        //bad request
+        $resJson = array("result" => "empty", "code" => "400", "message" => "empty");
+        echo json_encode($resJson, JSON_UNESCAPED_UNICODE);
     }
-    $resJson = array("result" => "success", "code" => "200", "message" => $arrJson);
-    echo json_encode($resJson, JSON_UNESCAPED_UNICODE);
 } else {
     //bad request
     $resJson = array("result" => "fail", "code" => "400", "message" => "error");

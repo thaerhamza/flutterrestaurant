@@ -19,7 +19,7 @@ if (
     if ($result->rowCount() > 0) {
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             // extract($row);
-            $arrJson = $row;
+            $arrJson[] = $row;
         }
     }
     $resJson = array("result" => "success", "code" => "200", "message" => $arrJson);
