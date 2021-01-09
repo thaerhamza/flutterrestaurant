@@ -12,9 +12,19 @@ if (
 ) {
     $start = $_GET["start"];
     $end = $_GET["end"];
-
-    $sql = "select * from users order by use_id desc limit $start , $end";
-    $result = dbExec($sql, []);
+	$txtsearch = $_GET["txtsearch"];
+ 	$selectArray = array();
+    array_push($selectArray, "%" . htmlspecialchars(strip_tags($txtsearch)) . "%");
+	if(trim($txtsearch) != "")
+	{
+		$sql = "select * from users where use_name like ? order by use_id desc limit $start , $end";
+		$result = dbExec($sql, $selectArray);
+	}
+	else
+	{
+		$sql = "select * from users order by use_id desc limit $start , $end";
+		$result = dbExec($sql, []);
+	}
     $arrJson = array();
     if ($result->rowCount() > 0) {
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {

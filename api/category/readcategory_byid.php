@@ -4,15 +4,15 @@ header("Content-Type: application/json; charset=UTF-8");
 
 include_once "../../library/function.php";
 if (
-    isset($_GET["use_id"])
-    && is_numeric($_GET["use_id"])
+    isset($_GET["cat_id"])
+    && is_numeric($_GET["cat_id"])
     && is_auth()
 ) {
-    $use_id = htmlspecialchars(strip_tags($_GET["use_id"]));
+    $cat_id = htmlspecialchars(strip_tags($_GET["cat_id"]));
 
     $selectArray = array();
-    array_push($selectArray, $use_id);
-    $sql = "select * from users where use_id = ?";
+    array_push($selectArray, $cat_id);
+    $sql = "select * from category where cat_id = ?";
     $result = dbExec($sql, $selectArray);
     $arrJson = array();
     if ($result->rowCount() > 0) {

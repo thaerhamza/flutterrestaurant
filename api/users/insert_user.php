@@ -3,6 +3,9 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 include_once "../../library/function.php";
+/*$images = uploadCustomerImage("file", '../../images/customer/' , 400 , 600 );
+	$img_image = $images['image'];
+	$img_thumbnail  = $images['thumbnail'];*/
 if (
     isset($_POST["use_name"])
     && isset($_POST["use_pwd"])

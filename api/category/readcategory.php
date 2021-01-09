@@ -4,19 +4,31 @@ header("Content-Type: application/json; charset=UTF-8");
 
 include_once "../../library/function.php";
 if (
-    isset($_GET["use_id"])
-    && is_numeric($_GET["use_id"])
+    isset($_GET["start"])
+    && is_numeric($_GET["start"])
+    && isset($_GET["end"])
+    && is_numeric($_GET["end"])
     && is_auth()
 ) {
-    $use_id = htmlspecialchars(strip_tags($_GET["use_id"]));
-
-    $selectArray = array();
-    array_push($selectArray, $use_id);
-    $sql = "select * from users where use_id = ?";
-    $result = dbExec($sql, $selectArray);
+    $start = $_GET["start"];
+    $end = $_GET["end"];
+	$txtsearch = $_GET["txtsearch"];
+ 	$selectArray = array();
+    array_push($selectArray, "%" . htmlspecialchars(strip_tags($txtsearch)) . "%");
+	if(trim($txtsearch) != "")
+	{
+		$sql = "select * from category where cat_name like ? order by cat_id desc limit $start , $end";
+		$result = dbExec($sql, $selectArray);
+	}
+	else
+	{
+		$sql = "select * from category order by cat_id desc limit $start , $end";
+		$result = dbExec($sql, []);
+	}
     $arrJson = array();
     if ($result->rowCount() > 0) {
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            // extract($row);
             $arrJson[] = $row;
         }
     }
