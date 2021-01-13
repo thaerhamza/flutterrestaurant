@@ -3,6 +3,7 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 include_once "../../library/function.php";
+include_once "../../library/create_image.php";
 if (
     isset($_POST["cat_id"])
     && is_numeric($_POST["cat_id"])
@@ -11,6 +12,10 @@ if (
     
     && is_auth()
 ) {
+	$images = uploadImage("file" , '../../images/category/' , 200 , 600);
+	$img_image = $images["image"];
+	$img_thumbnail = $images["thumbnail"];
+	
     $cat_name = $_POST["cat_name"];
     $cat_name_en = $_POST["cat_name_en"];
    
@@ -19,11 +24,29 @@ if (
     $updateArray = array();
     array_push($updateArray, htmlspecialchars(strip_tags($cat_name)));
     array_push($updateArray, htmlspecialchars(strip_tags($cat_name_en)));
+	if($img_image != "")
+	{
+		array_push($updateArray, htmlspecialchars(strip_tags($img_image)));
+		array_push($updateArray, htmlspecialchars(strip_tags($img_thumbnail)));
+	}
     array_push($updateArray, htmlspecialchars(strip_tags($cat_id)));
 
-    $sql = "update category 
-    set cat_name=?,cat_name_en=?,cat_regdate=now()
-    where cat_id=?";
+	if($img_image != "")
+	{
+		$sql = "update category 
+		set cat_name=?,cat_name_en=?,
+		cat_image = ? , cat_thumbnail = ? , 
+		cat_regdate=now()
+		where cat_id=?";
+	}
+	else
+	{
+		$sql = "update category 
+		set cat_name=?,cat_name_en=?,
+		
+		cat_regdate=now()
+		where cat_id=?";
+	}
     $result = dbExec($sql, $updateArray);
 
 

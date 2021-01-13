@@ -1,6 +1,6 @@
 <?php
 //==============================================begin images 
-function uploadCustomerImage($inputName, $uploadDir  , $thumbnail_width , $image_width)
+function uploadImage($inputName, $uploadDir  , $thumbnail_width , $image_width)
 {
 	$image = $_FILES[$inputName];
 	//echo "error " . $image['name'] . $image['tmp_name'] . "end;";	
