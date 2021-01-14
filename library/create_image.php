@@ -19,7 +19,7 @@ function uploadImage($inputName, $uploadDir  , $thumbnail_width , $image_width)
 		// make sure the image width does not exceed the
 		// maximum allowed width
 		
-		if (LIMIT_PRODUCT_WIDTH && $width > $image_width) {
+		if ($width > $image_width) {
 //					echo "after";
 			$result    = createThumbnail($image['tmp_name'], $uploadDir . $imagePath, $image_width);
 			$imagePath = $result;
@@ -133,4 +133,3 @@ function copyImage($srcFile, $destFile, $w, $h, $quality = 75)
     return $destFile;
 
 }
-?>
