@@ -10,14 +10,24 @@ if (
     && isset($_POST["foo_name"])
     && isset($_POST["foo_name_en"])
     && isset($_POST["foo_price"])
-	&& isset($_POST["foo_info"]
-			&& isset($_POST["foo_info_en"])
+	&& isset($_POST["foo_info"])
+			 && isset($_POST["foo_info_en"])
     
     && is_auth()
 ) {
-	$images = uploadImage("file" , '../../images/food/' , 200 , 600);
-	$img_image = $images["image"];
-	$img_thumbnail = $images["thumbnail"];
+		if (!empty($_FILES["file"]['name']) )
+	{
+		$images = uploadImage("file" , '../../images/food/' , 200 , 600);
+		$img_image = $images["image"];
+		$img_thumbnail = $images["thumbnail"];
+    
+	}
+	else
+	{
+		$img_image = "";
+		$img_thumbnail = "";
+	}
+
 	
     $foo_name = $_POST["foo_name"];
     $foo_name_en = $_POST["foo_name_en"];
@@ -49,8 +59,7 @@ if (
 		set foo_name=?,foo_name_en=?,
 		set foo_price=?,foo_offer=?,
 		set foo_info=?,foo_info_en=?,
-		foo_image = ? , foo_thumbnail = ? , 
-		foo_regdate=now()
+		foo_image = ? , foo_thumbnail = ? 
 		where foo_id=?";
 	}
 	else
@@ -58,9 +67,9 @@ if (
 			$sql = "update food 
 		set foo_name=?,foo_name_en=?,
 		set foo_price=?,foo_offer=?,
-		set foo_info=?,foo_info_en=?,
+		set foo_info=?,foo_info_en=?
 		
-		foo_regdate=now()
+		
 		where foo_id=?";
 	}
     $result = dbExec($sql, $updateArray);

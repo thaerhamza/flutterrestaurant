@@ -10,13 +10,23 @@ if (
     && isset($_POST["cat_name_en"])
   
 ) {
+	if (!empty($_FILES["file"]['name']) )
+	{
+		$images = uploadImage("file" , '../../images/category/' , 200 , 600);
+		$img_image = $images["image"];
+		$img_thumbnail = $images["thumbnail"];
+    
+    
+	}
+	else
+	{
+		$img_image = "";
+		$img_thumbnail = "";
+	}
     $cat_name = $_POST["cat_name"];
     $cat_name_en = $_POST["cat_name_en"];
 	
-	$images = uploadImage("file" , '../../images/category/' , 200 , 600);
-	$img_image = $images["image"];
-	$img_thumbnail = $images["thumbnail"];
-    
+	
 
 
     $insertArray = array();

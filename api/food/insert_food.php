@@ -20,11 +20,18 @@ if (isset($_POST["foo_name"])
 	$foo_offer = $_POST["foo_offer"] == null ? "" : $_POST["foo_offer"]  ;
     $foo_info = $_POST["foo_info"];
 	$foo_info_en = $_POST["foo_info_en"] == null ?"" : $_POST["foo_info_en"] ;
-	
-	$images = uploadImage("file" , '../../images/food/' , 200 , 600);
-	$img_image = $images["image"];
-	$img_thumbnail = $images["thumbnail"];
+	if (!empty($_FILES["file"]['name']) )
+	{
+		$images = uploadImage("file" , '../../images/food/' , 200 , 600);
+		$img_image = $images["image"];
+		$img_thumbnail = $images["thumbnail"];
     
+	}
+	else
+	{
+		$img_image = "";
+		$img_thumbnail = "";
+	}
 
 
     $insertArray = array();
