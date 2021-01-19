@@ -15,13 +15,14 @@ if (
     $start = $_GET["start"];
     $end = $_GET["end"];
 	$cat_id = $_GET["cat_id"];
-	$txtsearch = $_GET["txtsearch"];
+	
+	$txtsearch = !isset($_GET["txtsearch"])   ? "" : $_GET["txtsearch"]  ;
  	$selectArray = array();
 	array_push($selectArray,  htmlspecialchars(strip_tags($cat_id)));
     array_push($selectArray, "%" . htmlspecialchars(strip_tags($txtsearch)) . "%");
 	if(trim($txtsearch) != "")
 	{
-		$sql = "select * from food where  cat_id = ? foo_name like ? order by foo_id desc limit $start , $end";
+		$sql = "select * from food where  cat_id = ? and foo_name like ? order by foo_id desc limit $start , $end";
 		$result = dbExec($sql, $selectArray);
 	}
 	else

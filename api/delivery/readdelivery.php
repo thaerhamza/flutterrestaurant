@@ -8,21 +8,24 @@ if (
     && is_numeric($_GET["start"])
     && isset($_GET["end"])
     && is_numeric($_GET["end"])
-    && is_auth()
+	
+    
 ) {
     $start = $_GET["start"];
     $end = $_GET["end"];
+	
 	$txtsearch = !isset($_GET["txtsearch"])   ? "" : $_GET["txtsearch"]  ;
  	$selectArray = array();
+	
     array_push($selectArray, "%" . htmlspecialchars(strip_tags($txtsearch)) . "%");
 	if(trim($txtsearch) != "")
 	{
-		$sql = "select * from category where cat_name like ? order by cat_id desc limit $start , $end";
+		$sql = "select * from delivery where  del_name like ? order by del_id desc limit $start , $end";
 		$result = dbExec($sql, $selectArray);
 	}
 	else
 	{
-		$sql = "select * from category order by cat_id desc limit $start , $end";
+		$sql = "select * from delivery  order by del_id desc limit $start , $end";
 		$result = dbExec($sql, []);
 	}
     $arrJson = array();
