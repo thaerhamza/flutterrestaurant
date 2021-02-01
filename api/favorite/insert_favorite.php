@@ -30,8 +30,8 @@ if (
 
 	  $readArray = array();
 	
-    array_push($readArray, htmlspecialchars(strip_tags($foo_id)));
-	array_push($readArray, htmlspecialchars(strip_tags($cus_id)));
+    array_push($readArray, htmlspecialchars(strip_tags($cus_id)));
+	array_push($readArray, htmlspecialchars(strip_tags($foo_id)));
 	
     $sql = "select * from favorite where cus_id = ? and foo_id = ?  order by foo_id desc limit 0,1";
     $result = dbExec($sql, $readArray);

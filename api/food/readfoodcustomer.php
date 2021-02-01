@@ -42,7 +42,9 @@ if (
 	}
 	else
 	{
-		$sql = "select * from food where  1 = 1 $sqlWhere order by foo_id desc limit $start , $end";
+		$sql = "select * 
+		, (select fav_id from favorite where foo_id = food.foo_id and cus_id = $cus_id ) as fav_id 
+		from food where  1 = 1 $sqlWhere order by foo_id desc limit $start , $end";
 	
 		$result = dbExec($sql, []);
 	}

@@ -24,14 +24,14 @@ if (
     array_push($selectArray, "%" . htmlspecialchars(strip_tags($txtsearch)) . "%");
 	if(trim($txtsearch) != "")
 	{
-		$sql = "select food.* from food inner join favorite on 
+		$sql = "select food.* , fav_id from food inner join favorite on 
 		food.foo_id = favorite.foo_id where cus_id = $cus_id  and foo_name like ? 
 		order by fav_id  desc limit $start , $end";
 		$result = dbExec($sql, $selectArray);
 	}
 	else
 	{
-		$sql = "select food.* from food inner join favorite on 
+		$sql = "select food.* , fav_id from food inner join favorite on 
 		food.foo_id = favorite.foo_id 
 		where cus_id = $cus_id order by foo_id desc limit $start , $end";
 	
